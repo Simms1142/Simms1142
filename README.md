@@ -1,7 +1,4 @@
-## Hi there 👋
 
-<!--
-**Simms1142/Simms1142** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 Stephen Simms 
 sasimms@my.waketech.edu
 My GitHub account shows repositories I am currently creating.
