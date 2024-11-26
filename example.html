@@ -1,47 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Number Guessing Game</title>
-    <script defer src="https://cdn.jsdelivr.net/npm/pyscript@0.9.0/pyscript.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pyscript@0.9.0/pyscript.css">
+  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" /> 
+  <script defer src="https://pyscript.net/latest/pyscript.js"></script> 
+  <title>Number Guessing Game</title>
+  <style>
+    label {
+        display: block;
+    }
+  </style>
 </head>
-<body>
+<body>    
 
-<h2>Welcome to the Number Guessing Game!</h2>
-<p>Guess a number between 1 and 100:</p>
-<input type="number" id="guessInput" min="1" max="100">
-<button id="submitGuessBtn">Submit Guess</button>
-<p id="result"></p>
+<py-config> 
+  packages = ['numpy']
+</py-config>
 
 <py-script>
-import random
-from js import document
+# Import numpy and generate a random number between 0 and 99
+import numpy as np
+selection = np.random.randint(0, 100, 1)[0]
+</py-script>
 
-# Generate a random number between 1 and 100
-random_number = random.randint(1, 100)
+<form>
+  <label for="guess">Guess:</label> 
+  <input name="guess" id="guess">
+  
+  <button type="button" id="submit">Check Guess</button>
+  
+  <label for="result">Result:</label>
+  <div name="result" id="result"></div>       
+</form>
 
+<py-script>
+from pyscript import when, Element
+
+@when("click", selector="#submit")
 def check_guess(event):
     # Get the user's guess from the input field
-    user_guess = int(document.getElementById("guessInput").value)
-    result_text = ""
+    user_guess = int(Element("guess").value)
+    result = Element("result")
     
-    # Check if the guess is correct
-    if user_guess < random_number:
-        result_text = "Too low! Try again."
-    elif user_guess > random_number:
-        result_text = "Too high! Try again."
+    # Compare the guess with the randomly generated number
+    if user_guess == selection:
+        result.write("Congratulations! You guessed correctly.")
+    elif user_guess > selection:
+        result.write("Try again! Your guess was too high.")
     else:
-        result_text = f"Correct! The number was {random_number}. You win!"
-    
-    # Display the result on the page
-    document.getElementById("result").innerText = result_text
-    # Clear the input field for the next guess
-    document.getElementById("guessInput").value = ""
-
-# Attach the check_guess function to the button's click event
-document.getElementById("submitGuessBtn").bind("click", check_guess)
+        result.write("Try again! Your guess was too low.")
 </py-script>
 
 </body>
