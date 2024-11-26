@@ -1,52 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" /> 
-<script defer src="https://pyscript.net/latest/pyscript.js"></script> 
-<title>Number Guessing Game</title>
-    <style>
-    label{
-        display:block;
+  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" /> 
+  <script defer src="https://pyscript.net/latest/pyscript.js"></script> 
+  <title>Number Guessing Game</title>
+  <style>
+    label {
+        display: block;
     }
-</style>
+  </style>
 </head>
 <body>    
+
 <py-config> 
-packages = ['numpy']
+  packages = ['numpy']
 </py-config>
+
 <py-script>
+# Import numpy and generate a random number between 0 and 99
 import numpy as np
-selection = np.random.randint(0,100,1)[0] 
+selection = np.random.randint(0, 100, 1)[0]
 </py-script>
 
-    <form>
-<label for="guess">Guess:</label> 
+<form>
+  <label for="guess">Guess:</label> 
   <input name="guess" id="guess">
-      
-<button type="button" id="submit">Check Guess</button>
-<label for="result">Result:</label>
- <div name="result" id="result"></div>       
+  
+  <button type="button" id="submit">Check Guess</button>
+  
+  <label for="result">Result:</label>
+  <div name="result" id="result"></div>       
 </form>
 
 <py-script>
 from pyscript import when, Element
+
 @when("click", selector="#submit")
 def check_guess(event):
-user_guess = int(Element("guess").value)
-result Element("result")
-if user_guess == selection:
-result.write("Congratulations! You guessed correctly.") 
-elif user_guess > selection:
-result.write("Try again! Your guess was too high.")
-else:
-    result.write("Try again! Your guess was too low.")
-
-
+    # Get the user's guess from the input field
+    user_guess = int(Element("guess").value)
+    result = Element("result")
+    
+    # Compare the guess with the randomly generated number
+    if user_guess == selection:
+        result.write("Congratulations! You guessed correctly.")
+    elif user_guess > selection:
+        result.write("Try again! Your guess was too high.")
+    else:
+        result.write("Try again! Your guess was too low.")
 </py-script>
+
 </body>
 </html>
-
-
 
 
 
