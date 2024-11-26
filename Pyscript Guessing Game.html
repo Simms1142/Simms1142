@@ -15,7 +15,7 @@
 packages = ['numpy']
 </py-config>
 <py-script>
-Import numpy as np
+import numpy as np
 selection = np.random.randint(0,100,1)[0] 
 </py-script>
 
@@ -29,9 +29,9 @@ selection = np.random.randint(0,100,1)[0]
 </form>
 
 <py-script>
-from pyscript import when
+from pyscript import when, Element
 @when("click", selector="#submit")
-def check guess():
+def check_guess(event):
 user_guess = int(Element("guess").value)
 result Element("result")
 if user_guess == selection:
